@@ -17,7 +17,7 @@ public:
     int GetCols();
     const std::vector<std::string> GetHeader();
     const std::vector<std::string> GetRowNames();
-    const std::vector<std::vector <int> > GetRowData();
+    const std::vector<std::vector <short> > GetRowData();
 
     ~InputTable() {}
 
@@ -30,7 +30,7 @@ void readData(const QString &fileName, const QString &sep);
 private:
     std::vector<std::string> header; // This will hold the header of the file
     std::vector<std::string> rowNames; // This will hold the row names
-    std::vector<std::vector <int> > rowData; // This will hold the numerical data row-wise
+    std::vector<std::vector <short> > rowData; // This will hold the numerical data row-wise
     int nrow;
     int ncol;
   };

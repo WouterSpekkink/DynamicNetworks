@@ -16,7 +16,7 @@ std::vector<std::string> TwoModeEdges::CalcIntervals()
     std::string interval;
     std::ostringstream convert;
     std::vector<std::string> tempCollection;
-    for(int i = 0; i != header.size(); i++) {
+    for(unsigned int i = 0; i != header.size(); i++) {
 	convert.str(std::string());
 	convert << i + 1;
 	std::string tempOne = convert.str();
@@ -29,7 +29,7 @@ std::vector<std::string> TwoModeEdges::CalcIntervals()
     return tempCollection;
 }
 
-std::vector<std::vector <int> > TwoModeEdges::CalcEdges()
+std::vector<std::vector <short> > TwoModeEdges::CalcEdges()
 {
     int step = 1;
     int max = header.size();
@@ -37,13 +37,13 @@ std::vector<std::vector <int> > TwoModeEdges::CalcEdges()
     loadProgress->setAttribute(Qt::WA_DeleteOnClose);
     loadProgress->setModal(true);
     loadProgress->show();
-    std::vector<std::vector <int> > finalVec;
+    std::vector<std::vector <short> > finalVec;
 
     for(std::vector<std::string>::size_type i = 0; i != header.size(); i++) {
 	for(std::vector<std::vector <int> >::size_type j = 0; j != rowData.size(); j++) {
-	    std::vector<int> currentRow = rowData[j];
+	    std::vector<short> currentRow = rowData[j];
 	    if(currentRow[i] > 0) {
-		std::vector<int> tempVec;
+		std::vector<short> tempVec;
 		tempVec.push_back(i);
 		tempVec.push_back(j);
 		finalVec.push_back(tempVec);
@@ -57,7 +57,7 @@ std::vector<std::vector <int> > TwoModeEdges::CalcEdges()
     return finalVec;
 }
 
-const std::vector<std::vector <int> > TwoModeEdges::GetEdges()
+const std::vector<std::vector <short> > TwoModeEdges::GetEdges()
 {
     return edges;
 }

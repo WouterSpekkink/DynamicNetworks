@@ -9,7 +9,7 @@ bool CsvOutput(MatrixMulti *matrix, std::string filename, std::string sep)
 	return false;
     }
     MatrixMulti *outputMatrix = matrix; //Pointer to the matrix to be written
-    std::vector<std::vector <int> > data = outputMatrix->GetPartData();
+    std::vector<std::vector <short> > data = outputMatrix->GetPartData();
     std::vector<std::string> rowNames = outputMatrix->GetPartRows();
     fileOut << sep;
     std::vector<std::string>::iterator it;
@@ -20,8 +20,8 @@ bool CsvOutput(MatrixMulti *matrix, std::string filename, std::string sep)
     
     for(std::vector<std::string>::size_type i = 0; i != rowNames.size(); i++) {
 	fileOut << rowNames[i] << sep;
-	std::vector<int> currentRow = data[i];
-	std::vector<int>::iterator it2;
+	std::vector<short> currentRow = data[i];
+	std::vector<short>::iterator it2;
 	for(it2 = currentRow.begin(); it2 != currentRow.end(); it2++) {
 	    fileOut << *it2 << sep;
 	}
@@ -41,7 +41,7 @@ bool CsvOutput(MatCollection *collection, std::string filename, std::string sep)
     std::vector<MatrixMulti>::iterator collit;
     for(collit = outputCol.begin(); collit != outputCol.end(); collit++) {
 	MatrixMulti currentMat = *collit;
-	std::vector<std::vector <int> > data = currentMat.GetPartData();
+	std::vector<std::vector <short> > data = currentMat.GetPartData();
 	std::vector<std::string> rowNames = currentMat.GetPartRows();
 	fileOut << sep;
 	std::vector<std::string>::iterator it;
@@ -52,8 +52,8 @@ bool CsvOutput(MatCollection *collection, std::string filename, std::string sep)
 	
 	for(std::vector<std::string>::size_type i = 0; i != rowNames.size(); i++) {
 	    fileOut << rowNames[i] << sep;
-	    std::vector<int> currentRow = data[i];
-	    std::vector<int>::iterator it2;
+	    std::vector<short> currentRow = data[i];
+	    std::vector<short>::iterator it2;
 	    for(it2 = currentRow.begin(); it2 != currentRow.end(); it2++) {
 		fileOut << *it2 << sep;
 	    }
@@ -93,7 +93,7 @@ bool CsvOutput(EdgeFinder *edges, std::string networkType, std::string filename,
 	    if(networkType == "Whole Network - Dynamic" || networkType == "Ego Network - Dynamic") {
 		fileOut << edgeNames[currentEntry[0]] << sep << edgeNames[currentEntry[1]] << sep << "Undirected" << sep;
 		fileOut << "<";
-		for(int i = 2; i != currentEntry.size() - 2; i++) {
+		for(unsigned int i = 2; i != currentEntry.size() - 2; i++) {
 		    if(i % 2 == 0) { 
 			fileOut << attributeIntervals[currentEntry[i]];
 		    } else {
@@ -109,7 +109,7 @@ bool CsvOutput(EdgeFinder *edges, std::string networkType, std::string filename,
 	    
 	    if(networkType == "Whole Network - Dynamic" || networkType == "Ego Network - Dynamic") {
 		fileOut << "<";
-		for(int i = 2; i != currentEntry.size() - 2; i++) {
+		for(unsigned int i = 2; i != currentEntry.size() - 2; i++) {
 		    if(i % 2 == 0) {
 			fileOut << edgeIntervals[currentEntry[i]] << ",";
 		    }
@@ -118,7 +118,7 @@ bool CsvOutput(EdgeFinder *edges, std::string networkType, std::string filename,
 		fileOut << '\n';
 				    
 	    } else if(networkType == "Partial Network - Static" || networkType == "Ego Network - Static") {
-		for(int i = 3; i != currentEntry.size() - 1; i++) {
+		for(unsigned int i = 3; i != currentEntry.size() - 1; i++) {
 		    fileOut << colNames[currentEntry[i]] << " - ";
 		}
 		fileOut << colNames[currentEntry[currentEntry.size()- 1]];
@@ -168,7 +168,7 @@ bool CsvOutput(TwoModeEdges *edges, std::string filename, std::string sep)
     if(!fileOut.is_open()) {
 	return false;
     }
-    std::vector<std::vector <int> > myEdges = edges->GetEdges();
+    std::vector<std::vector <short> > myEdges = edges->GetEdges();
     std::vector<std::string> edgeNames = edges->GetNames();
     std::vector<std::string> edgeIntervals = edges->GetIntervals();
     std::vector<std::string> colNames = edges->GetHeader();
@@ -176,9 +176,9 @@ bool CsvOutput(TwoModeEdges *edges, std::string filename, std::string sep)
   
     fileOut << "Source" << sep << "Target" << sep << "Type" << sep << "Weight" << sep << "Time Interval\n";
     
-    std::vector<std::vector <int> >::iterator it;
+    std::vector<std::vector <short> >::iterator it;
     for(it = myEdges.begin(); it != myEdges.end(); it++) {
-	std::vector<int> currentEntry = *it;
+	std::vector<short> currentEntry = *it;
 	if(!currentEntry.empty()) {
 	    fileOut << edgeNames[currentEntry[1]] << sep << colNames[currentEntry[0]] << sep << "Undirected" << sep << weight << sep;
 	    fileOut << edgeIntervals[currentEntry[0]] ;

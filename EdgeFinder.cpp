@@ -108,12 +108,12 @@ std::vector<std::vector <int> > EdgeFinder::CalcEdges()
 	
 	// currentMatrix is the current adjacency matrix
 	MatrixMulti currentMatrix = *it;
-	const std::vector<std::vector <int> > currentData = currentMatrix.GetPartData();
+	const std::vector<std::vector <short> > currentData = currentMatrix.GetPartData();
 	
 	// Here i iterates through rows
 	for(std::vector<std::vector <int> >::size_type i = 0; i != currentData.size(); i++) {  
-	    std::vector<int> currentRow = currentData[i];
-	    for(std::vector<int>::size_type j = 0; j != currentRow.size(); j++) { 
+	    std::vector<short> currentRow = currentData[i];
+	    for(std::vector<short>::size_type j = 0; j != currentRow.size(); j++) { 
 		int currentCell = currentRow[j];
 		
 		// We don't want to include the i,j cells of the table, which are self-loops
@@ -214,11 +214,11 @@ std::vector<std::vector <int> > EdgeFinder::CalcEdges(std::string agent)
 
 	// currentMatrix is the current adjacency matrix
 	MatrixMulti currentMatrix = *it;
-	const std::vector<std::vector <int> > currentData = currentMatrix.GetPartData();
+	const std::vector<std::vector <short> > currentData = currentMatrix.GetPartData();
 	
-	std::vector<int> currentRow = currentData[agentIndex];
-	std::vector<int> neighbors;	
-	for(std::vector<int>::size_type i = 0; i != currentRow.size(); i++) {
+	std::vector<short> currentRow = currentData[agentIndex];
+	std::vector<short> neighbors;	
+	for(std::vector<short>::size_type i = 0; i != currentRow.size(); i++) {
 	    int currentCell = currentRow[i];
 	    
 	    // We don't want to include self loops
@@ -244,7 +244,7 @@ std::vector<std::vector <int> > EdgeFinder::CalcEdges(std::string agent)
 		    if(networkType == "Ego Network - Static") {
 			if(tempVec[tempVec.size() - 1] != frameCount) {
 			    tempVec[2] = tempVec[2] + 1;
-			    tempVec.push_back(frameCount);
+			    tempVec.push_back((short)frameCount);
 			    edgeHash.Set(keyname, tempVec);
 			} 
 		    } else {
@@ -269,8 +269,8 @@ std::vector<std::vector <int> > EdgeFinder::CalcEdges(std::string agent)
 	}
 	for(std::vector<int>::size_type i = 0; i != neighbors.size(); i++) {
 	    int currentNeighbor = neighbors[i];
-	    std::vector<int> currentRow = currentData[currentNeighbor];
-	    for(std::vector<int>::size_type j = 0; j != currentRow.size(); j++) {
+	    std::vector<short> currentRow = currentData[currentNeighbor];
+	    for(std::vector<short>::size_type j = 0; j != currentRow.size(); j++) {
 		int currentCell = currentRow[j];
 		// In this case we also don't want the edge with the original ego 
 		if(currentCell > 0 && currentNeighbor != j && j != agentIndex) {

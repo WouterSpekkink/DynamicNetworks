@@ -86,11 +86,11 @@ void MetricsFinder::CalcInvolvement()
     for(it = currentCollection.begin(); it != currentCollection.end(); it++) {
 	// currentMatrix will be the currently selected adjacency matrix
 	MatrixMulti currentMatrix = *it;
-	const std::vector<std::vector <int> > currentData = currentMatrix.GetPartData();
+	const std::vector<std::vector <short> > currentData = currentMatrix.GetPartData();
 
 	// We can now simply select the row and column with the agent number
-	std::vector<int> currentRow = currentData[agentNumber];
-	int currentCell = currentRow[agentNumber];
+	std::vector<short> currentRow = currentData[agentNumber];
+	short currentCell = currentRow[agentNumber];
 	dataOne.push_back(currentCell);
     }
 }
@@ -121,10 +121,10 @@ void MetricsFinder::CalcDegree()
     for(it = currentCollection.begin(); it != currentCollection.end(); it++) {
 	// currentMatrix will be the currently selected adjacency matrix
 	MatrixMulti currentMatrix = *it;
-	const std::vector<std::vector <int> > currentData = currentMatrix.GetPartData();
+	const std::vector<std::vector <short> > currentData = currentMatrix.GetPartData();
 	int sum = 0;
 	// We can now simply select the row and column with the agent number
-	std::vector<int> currentRow = currentData[agentNumber];
+	std::vector<short> currentRow = currentData[agentNumber];
 	for(std::vector<int>::size_type i = 0; i != currentRow.size(); i++) {
 	    int currentCell = currentRow[i];
 	    if(i != agentNumber && currentCell > 0) {;

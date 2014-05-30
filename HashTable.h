@@ -22,7 +22,7 @@ class HashClass{
     void Set(std::vector<int> key, const std::vector<int>& value);  
     std::vector<int> Get(std::vector<int> key);
     bool InUse(std::vector<int> key);
-    const unsigned int GetTableSize();
+    unsigned int GetTableSize();
     const std::vector<std::vector <int> > GetData();
     
 };

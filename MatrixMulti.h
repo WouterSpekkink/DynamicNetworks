@@ -11,16 +11,16 @@ class MatrixMulti {
 
 public:
     MatrixMulti(InputTable *table, int begin, int end);
-    const std::vector<std::vector <int> > GetPartData();
+    const std::vector<std::vector <short> > GetPartData();
     const std::vector<std::string> GetPartRows();
     
 private:
-    std::vector<std::vector <int> > rowData;
+    std::vector<std::vector <short> > rowData;
     int frameBegin;
     int frameEnd;
     InputTable *mainTable;
-    std::vector<std::vector <int> > partData;
-    std::vector<std::vector <int> > CalcMatrix();
+    std::vector<std::vector <short> > partData;
+    std::vector<std::vector <short> > CalcMatrix();
 
     // CalcMatrix() makes an adjacency matrix for the part
     // of the incidence matrix that is assigned to the 

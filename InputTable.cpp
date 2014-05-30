@@ -63,10 +63,10 @@ void InputTable::ReadFile(const std::string &inputFile, const char &del)
 	    std::vector<std::string> tempVector = *it;
 	    rowNames.push_back(tempVector[0]); // This makes the vector of row names
 	    std::vector <std::string>::iterator it2;
-	    std::vector <int> numbers;
+	    std::vector <short> numbers;
 	    
 	    for(it2 = tempVector.begin() + 1; it2 != tempVector.end(); it2++) {
-		int tempNumber = 0;
+		short tempNumber = 0;
 		std::istringstream convert(*it2);
 		convert >> tempNumber;
 		numbers.push_back(tempNumber);
@@ -98,7 +98,7 @@ const std::vector<std::string> InputTable::GetRowNames()
     return rowNames;
 }
 
-const std::vector<std::vector <int> > InputTable::GetRowData() 
+const std::vector<std::vector <short> > InputTable::GetRowData() 
 {
     return rowData;
 }

@@ -18,22 +18,22 @@ public:
 
     ~TwoModeEdges() {};
 
-    const std::vector<std::vector <int> > GetEdges();
+    const std::vector<std::vector <short> > GetEdges();
     const std::vector<std::string> GetNames();
     const std::vector<std::string> GetIntervals();
     const std::vector<std::string> GetHeader();
 
 private:
     InputTable *mainTable;
-    std::vector<std::vector <int> > edges;
+    std::vector<std::vector <short> > edges;
     std::vector<std::string> namesTrans;
     std::vector<std::string> header;
     std::vector<std::string> intervalTrans;
-    std::vector<std::vector <int> > rowData;
+    std::vector<std::vector <short> > rowData;
     ProgressBar *loadProgress;
     
     std::vector<std::string> CalcIntervals();
-    std::vector<std::vector <int> > CalcEdges();
+    std::vector<std::vector <short> > CalcEdges();
 };
 
 #endif
