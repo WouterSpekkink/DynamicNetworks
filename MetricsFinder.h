@@ -28,6 +28,7 @@ public:
     // Calculations requested here.
     void CalcInvolvement();    
     void CalcDegree();
+    void CalcModularity();
 
 private:
     MatCollection *sourceCollection;
