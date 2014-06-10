@@ -142,10 +142,8 @@ void CalcModularity()
     // Let's make sure that the data vector is cleared.
     dataOne.clear();
     
-    // THE BELOW ACTUALLY WON'T WORK BECAUSE THE WEIGHTS ARE LACKING. I NEED TO MAKE A NEW MATRIXMULTI COLLECTION HERE MANUALLY. NO PROBS...
-
-    //std::vector<MatrixMulti> currentCollection = sourceCollection->GetCollection();
-    //std::vector<short> community;
+    std::vector<MatrixMulti> currentCollection = sourceCollection->GetCollection();
+    std::vector<short> community;
 
     // So here is where the algorithm should go
     // I need to iterate through all matrices
@@ -163,57 +161,54 @@ void CalcModularity()
 	    modularityGain.push_back(0.0);
 	}
 	// We initially set the sum of the weights within each community to 0 (E-in).
-	std::vector<std::vector <short> > sumWeightsWithinVector;
+	std::vector<short> sumWeightsWithin;
 	for(std::vector<short>::size_type i = 0; i != currentData.size(); i++) {
-	    std::vector<short> sumWeightsWithin;
-	    for(std::vector<short>::size_type j = 0; j != currentData.size(); j++) {
-		sumWeightsWithin.push_back = 0;
-	    }
-	    sumWeightsWithinVector.push_back(sumWeightsWithin);
+	    sumWeightsWithin.push_back = 0;
 	}
 	// We initially set the sum of the weights of links incident to nodes in the currentcommunity to 0 (E-tot).
-	std::vector<std::vector <short> > sumWeightsTotalVector;
-	for(std::vectorstd::vector <short> >size_type i = 0; i != currentData.size(); i++) {
-	    std::vector<short> sumWeightsTotal;
-	    for(std::vector<short>size_type j = 0; j != currentData.size(); j++) {
-		sumWeightsTotal.push_back(0);
-	    }
-	    sumWeightsTotalVector.push_back(sumWeightsTotal);
+	std::vector<short> sumWeightsTotal;
+	for(std::vector<short>size_type i = 0; i != currentData.size(); j++) {
+	    sumWeightsTotal.push_back(0);
 	}
 	// We initially set the sum of all incident linkages to 0 (k-i).
-	std::vector<std::vector <short> > sumIncidentAllVector;
+	std::vector<short> sumIncidentNode;
 	for(std::vector<short>::size_type i = 0; i != currentData.size(); i++) {
-	    std::vector<short> sumIncidentAll;
-	    for(std::vector<short>::size_type j = 0; j != currentData.size(); j++) {
-		sumIncidentAll.push_back(0);
-	    }
-	    sumIncidentAllVector.push_back(sumIncidentAll);
+	      sumIncidentNode.push_back(0);
 	}
 	// We initially set the sum of all incident linkages within each community to 0 (k-i,in).
-	std::vector<std::vector <short> > sumIncidentCommunityVector;
-	for(std::vector<short>::size_type i = 0; i != currentData.size(); i++) {
-	    std::vector<short> sumIncidentCommunity;
-	    for(std::<short>::size_type j = 0; j != currentData.size(); j++) {
-		sumIncidentCommunity.push_back(0);
-	    }
-	    sumIncidentCommunityVector.push_back(sumIncidentCommunity);
+	std::vector<short> sumIncidentCommunity;
+	for(std::<short>::size_type i = 0; i != currentData.size(); i++) {
+	    sumIncidentCommunity.push_back(0);
 	}
 	// We initially set the sum of the weights of all the nodes in the network to 0 (m).
 	short sumWeightsNetwork = 0;	
+	// Let's create a variable that tests whether the optimal modularity has been reached for the current matrix.
+	bool optimal = false;
 
-	// The below part should be the iterated part for all matrices
+	// We do the first iteration to set all variables
 	for(std::vector<short>::size_type i = 0; i != currentData.size(); i++) {
 	    // Every node is an i address.
 	    std::vector<short> currentNode = currentData[i];
+	    // Let's calculate all measures that we can calculate on the first run through the list of nodes
 	    for(std::vector<short>::size_type j = 0; j != currentNode.size(); j++) {
 		// Each potential neighbor is a j address.
 		short currentNeighbor = currentNode[j];
-		if(i != j && currentNeighbor > 0) {
-		    sumIncident[i] = sumIncident[i] + currentNeighbor; 
-		    if(community[i] == community[j]) {
-			communityWeight[i] = communityWeight[i] + currentNeighbor;
-		    }
-		}
+		// sum of the weights incident to i
+		sumIncidentNode[i] += currentNeighbor;
+		// currently, the communities are unique to all nodes, so we can use this formula. We cannot use this later on.
+		sumWeightsTotal[i] += currentNeighbor;
+		// sum of the weights for the whole network
+		sumWeightsNetwork += currentNeighbor;
+	    }
+	}
+	// Then we iterate until optimal modularity is found
+    	while (optimal == false) {
+	    for(std::vector<short>::size_type i = 0; i != currentData.size(); i++) {
+		short currentCommunity = community[i];
+		
+		// Below is just the formula. I don't know yet whether I call the variables in the right way.
+		modularityGain[i] = (((sumWeightsWithin[currentCommunity] + sumIncidentCommunity[i]) / (2 * sumWeightsNetwork)) - ((sumWeightsTotal[currentCommunity] + sumIncidentNode[i]) / (2 * sumWeightsNetwork)) * ((sumWeightsTotal[currentCommunity] + sumIncidentNode[i]) / (2 * sumWeightsNetwork))) - (((sumWeightsWithin[currentCommunity]) / (2 * sumWeightsNetwork)) - ((sumWeightsTotal[currentCommunity] / (2 * sumWeightsNetwork)) * (sumWeightsTotal[currentCommunity] / (2 * sumWeightsNetwork)))  - ((sumIncidentNode[i] / (2 * sumWeightsNetwork)) * (sumIncidentNode[i] / (2 * sumWeightsNetwork))));
+		
 	    }
 	}
     }
