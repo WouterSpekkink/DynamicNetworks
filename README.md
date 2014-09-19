@@ -22,10 +22,10 @@ The tool works with incidence matrices that are saved as a .csv file.
 The tool is only useful if the columns of the matrix represent events that are put in temporal order.
 An example is offered below.
 
-        Event1    Event2    Event3    Event4
-ActorA    1         0         1         0
-ActorB    0         1         0         1
-ActorC    1         1         0         0
+                Event1    Event2    Event3    Event4
+        ActorA    1         0         1         0
+        ActorB    0         1         0         1
+        ActorC    1         1         0         0
 
 The tool can be used to convert the incidence matrix into various types of edge lists that can
 be imported into Gephi.
