@@ -135,7 +135,7 @@ void MetricsFinder::CalcDegree()
     }
 }
 
-void CalcModularity()
+/*void CalcModularity()
 {
     // I'll need a Progress Bar and maybe a Hash table?
 
@@ -212,7 +212,7 @@ void CalcModularity()
 	    }
 	}
     }
-}
+    }*/
 
 const std::vector<int> MetricsFinder::GetDataOne()
 {

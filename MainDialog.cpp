@@ -79,7 +79,7 @@ MainDialog::MainDialog(QWidget *parent)
     connect(sepSelector, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(setSep(const QString &)));
     connect(importFile, SIGNAL(clicked()), this, SLOT(resetFileImport()));
     connect(importFile, SIGNAL(clicked()), this, SLOT(fireFileSend()));
-     connect(this, SIGNAL(sendFile(const QString &, const QString &)), inputTable, SLOT(readData(const QString &, const QString &)));
+    connect(this, SIGNAL(sendFile(const QString &, const QString &)), inputTable, SLOT(readData(const QString &, const QString &)));
     connect(inputTable, SIGNAL(importFinished()), this, SLOT(enableNetwork()));
     connect(inputTable, SIGNAL(importFinished()), this, SLOT(getDetails()));
     connect(exitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -146,7 +146,7 @@ MainDialog::MainDialog(QWidget *parent)
     QVBoxLayout *lowerMiddleLayout = new QVBoxLayout;
     lowerMiddleLayout->addWidget(goEdges);
     lowerMiddleLayout->addWidget(saveEdges);
-    lowerMiddleLayout->addWidget(openMetrics);
+    //lowerMiddleLayout->addWidget(openMetrics);
 
     QHBoxLayout *lowerLayout = new QHBoxLayout;
     lowerLayout->addWidget(exitButton);
@@ -256,11 +256,11 @@ void MainDialog::enableCalc()
     if(networkType == "Two Mode Network - Dynamic") {
 	goEdges->setEnabled(true);
 	saveEdges->setEnabled(false);
-	openMetrics->setEnabled(false);
+	//openMetrics->setEnabled(false);
     } else {
 	goEdges->setEnabled(false);    
 	saveEdges->setEnabled(false);
-	openMetrics->setEnabled(false);
+	//openMetrics->setEnabled(false);
     }
 }
 
@@ -297,7 +297,7 @@ void MainDialog::resetFileImport()
     goNetwork->setEnabled(false);
     goEdges->setEnabled(false);
     saveEdges->setEnabled(false);
-    openMetrics->setEnabled(false);
+    //openMetrics->setEnabled(false);
     currentAgent->setText("NA");
     selectedAgent = "NA";
     changeAgent->setEnabled(false);
@@ -401,7 +401,7 @@ void MainDialog::enableEdges()
     }
 }
 
-void MainDialog::enableMetrics()
+/*void MainDialog::enableMetrics()
 {
     if(networkType == "Partial Network - Static" || networkType == "Ego Network - Static") {
 	if(upperBound > lowerBound) {
@@ -410,7 +410,7 @@ void MainDialog::enableMetrics()
     } else {
 	openMetrics->setEnabled(true);
     }
-}
+    }*/
 
 void MainDialog::enableSave()
 {
@@ -435,13 +435,13 @@ void MainDialog::saveEdgesFile()
     }
 }
 
-void MainDialog::openMetricsDialog()
+/*void MainDialog::openMetricsDialog()
 {
     if(networkType == "Ego Network - Dynamic" || networkType == "Ego Network - Static") {
 	MetricsDialog *metricsDialog = new MetricsDialog(0, matCollection, networkType, selectedAgent, sep);
 	metricsDialog->exec();
     }
-}
+    }*/
 
 void MainDialog::openAgentDialog()
 {

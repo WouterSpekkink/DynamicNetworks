@@ -2,12 +2,14 @@
 #define MAINDIALOG_H
 
 // See what more to add later
+#include <QtGui>
+#include <QApplication>
 #include <QDialog>
 #include "InputTable.h"
 #include "MatCollection.h"
 #include "EdgeFinder.h"
 #include "CsvOutput.h"
-#include "MetricsFinder.h"
+//#include "MetricsFinder.h"
 #include "ActorSelectionDialog.h"
 #include "MetricsDialog.h"
 #include "TwoModeEdges.h"
@@ -18,7 +20,6 @@ class QPushButton;
 class QComboBox;
 class QLabel;
 class QSpinBox;
-class QSlider;
 class QCheckBox;
 
 class MainDialog : public QDialog {
@@ -49,8 +50,8 @@ private slots:
     void enableEdges();
     void enableSave();
     void saveEdgesFile();
-    void enableMetrics();
-    void openMetricsDialog();
+    //void enableMetrics();
+    //void openMetricsDialog();
     void openAgentDialog();
     void closing();
    
