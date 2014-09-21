@@ -29,3 +29,6 @@ An example is offered below.
 
 The tool can be used to convert the incidence matrix into various types of edge lists that can
 be imported into Gephi.
+
+================
+The graphical interface was made with the open source version of the Qt library. You'll need Qt 4.8 to build this program.
