@@ -90,7 +90,7 @@ MainDialog::MainDialog(QWidget *parent)
     lowerMonLabel = new QLabel(tr("Lower Bound: "));
     upperMonLabel = new QLabel(tr("Upper Bound: "));
 
-    lowerLabel = new QLabel(tr("<h3>Edge Finder & Metrics</h3>"));
+    lowerLabel = new QLabel(tr("<h3>Edge Finder</h3>"));
     
     goEdges = new QPushButton(tr("Find Edges"));
     goEdges->setEnabled(false);
@@ -98,8 +98,8 @@ MainDialog::MainDialog(QWidget *parent)
     saveEdges = new QPushButton(tr("Save Edges File"));
     saveEdges->setEnabled(false);
 
-    openMetrics = new QPushButton(tr("Metrics"));
-    openMetrics->setEnabled(false);
+    //openMetrics = new QPushButton(tr("Metrics"));
+    //openMetrics->setEnabled(false);
 
     connect(openFile, SIGNAL(clicked()), this, SLOT(getFile()));
     connect(sepSelector, SIGNAL(currentIndexChanged(const QString &)), this, SLOT(setSep(const QString &)));
@@ -121,11 +121,11 @@ MainDialog::MainDialog(QWidget *parent)
     connect(monitorLower, SIGNAL(valueChanged(int)), chooseLowerBound, SLOT(setValue(int)));
     connect(monitorUpper, SIGNAL(valueChanged(int)), chooseUpperBound, SLOT(setValue(int)));
     connect(goNetwork, SIGNAL(clicked()), this, SLOT(enableEdges()));
-    connect(goNetwork, SIGNAL(clicked()), this, SLOT(enableMetrics()));
+    //connect(goNetwork, SIGNAL(clicked()), this, SLOT(enableMetrics()));
     connect(goEdges, SIGNAL(clicked()), this, SLOT(findEdges()));
     connect(goEdges, SIGNAL(clicked()), this, SLOT(enableSave()));
     connect(saveEdges, SIGNAL(clicked()), this, SLOT(saveEdgesFile()));
-    connect(openMetrics, SIGNAL(clicked()), this, SLOT(openMetricsDialog()));
+    //connect(openMetrics, SIGNAL(clicked()), this, SLOT(openMetricsDialog()));
     connect(changeAgent, SIGNAL(clicked()), this, SLOT(openAgentDialog()));
 
     QHBoxLayout *topLayout = new QHBoxLayout;
