@@ -1,5 +1,5 @@
 /*
- Copyright 2014 Gephi
+ Copyright 2014 Wouter Spekkink
  Authors : Wouter Spekkink <wouter.spekkink@gmail.com>
  Website : http://www.wouterspekkink.org
 
