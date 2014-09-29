@@ -57,6 +57,9 @@ std::vector<std::string> EdgeFinder::CalcIntervals(bool weight)
     int start = 1;
     int frame = sourceCollection->GetFrameSize();
     int end = frame;
+    if(slide) {
+	end = start;
+    }
     std::string interval;
     std::vector<std::string> tempCollection;
     std::vector<MatrixMulti>::size_type length = 0;
