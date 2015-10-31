@@ -163,7 +163,7 @@ std::vector<std::vector <int> > EdgeFinder::CalcEdges()
 		       In that case we don't want to do anything with it.
 		       If it is from the same frame, then the last entry in the vector
 		       at the index should be of the same value as the current value
-		       if frameCount.*/
+		       of frameCount.*/
 		    
 		    if(edgeHash.InUse(keyname)) {
 			std::vector<int> tempVec = edgeHash.Get(keyname);
